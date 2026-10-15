@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="t">
+  <title id="t">うさぎの森 えいごスクール周辺の地図（架空）</title>
+  <style>
+    text { font-family: "Zen Maru Gothic", "Hiragino Sans", "Yu Gothic", sans-serif; }
+    .road-lbl { font-size: 13px; fill: #6b6b6b; font-weight: 700; }
+    .area { font-size: 15px; fill: #8a8a8a; font-weight: 700; letter-spacing: 2px; }
+    .poi { font-size: 13px; font-weight: 700; }
+  </style>
+
+  <!-- 地面 -->
+  <rect width="800" height="600" fill="#F2EFE9"/>
+
+  <!-- 街区（少し濃い面） -->
+  <g fill="#E9E5DC">
+    <rect x="40"  y="40"  width="170" height="120" rx="4"/>
+    <rect x="250" y="40"  width="190" height="120" rx="4"/>
+    <rect x="480" y="40"  width="150" height="120" rx="4"/>
+    <rect x="40"  y="330" width="170" height="110" rx="4"/>
+    <rect x="480" y="330" width="150" height="110" rx="4"/>
+    <rect x="250" y="480" width="190" height="100" rx="4"/>
+    <rect x="480" y="480" width="150" height="100" rx="4"/>
+    <rect x="670" y="480" width="110" height="100" rx="4"/>
+  </g>
+
+  <!-- 川 -->
+  <path d="M665 0 C 640 120, 700 200, 690 300 S 640 470, 700 600 L 760 600 C 700 470, 740 380, 745 300 S 700 110, 725 0 Z" fill="#AADAFF"/>
+  <text x="712" y="250" class="poi" fill="#4A89C8" transform="rotate(80 712 250)">もりのせせらぎ川</text>
+
+  <!-- 公園 -->
+  <rect x="40" y="180" width="170" height="130" rx="10" fill="#C8E6C9"/>
+  <circle cx="90" cy="230" r="10" fill="#A5D6A7"/><circle cx="150" cy="260" r="14" fill="#A5D6A7"/><circle cx="175" cy="215" r="9" fill="#A5D6A7"/>
+  <text x="125" y="292" class="poi" fill="#3E8E41" text-anchor="middle">うさぎ野中央公園</text>
+
+  <!-- 細い道路 -->
+  <g stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" fill="none">
+    <path d="M230 0 V600"/>
+    <path d="M460 0 V600"/>
+    <path d="M0 170 H660"/>
+    <path d="M0 460 H800"/>
+    <path d="M650 460 V600"/>
+  </g>
+  <g stroke="#DAD6CE" stroke-width="1" fill="none">
+    <path d="M224 0 V600 M236 0 V600"/>
+    <path d="M454 0 V600 M466 0 V600"/>
+  </g>
+
+  <!-- 大通り（黄色） -->
+  <path d="M0 320 H800" stroke="#F7D46C" stroke-width="22" fill="none"/>
+  <path d="M0 320 H800" stroke="#FDE293" stroke-width="18" fill="none"/>
+  <text x="120" y="349" class="road-lbl">もりのまち通り</text>
+
+  <!-- 線路（架空の電鉄） -->
+  <path d="M0 405 H800" stroke="#9E9E9E" stroke-width="6" fill="none"/>
+  <path d="M0 405 H800" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="14 14" fill="none"/>
+  <text x="40" y="398" class="road-lbl" fill="#757575">うさぎの森電鉄</text>
+
+  <!-- 駅 -->
+  <rect x="300" y="392" width="120" height="26" rx="13" fill="#FFFFFF" stroke="#9E9E9E" stroke-width="2"/>
+  <circle cx="316" cy="405" r="8" fill="#1A73E8"/>
+  <text x="316" y="409.5" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">駅</text>
+  <text x="330" y="410" class="poi" fill="#333">もりのまち駅</text>
+
+  <!-- 周辺スポット -->
+  <g>
+    <circle cx="545" cy="95" r="11" fill="#7B61FF"/><text x="545" y="99.5" font-size="11" fill="#fff" text-anchor="middle">文</text>
+    <text x="562" y="100" class="poi" fill="#5B45D6">もりのまち小学校</text>
+  </g>
+  <g>
+    <circle cx="300" cy="530" r="11" fill="#F29900"/><text x="300" y="534.5" font-size="11" fill="#fff" text-anchor="middle">店</text>
+    <text x="317" y="535" class="poi" fill="#C77700">どんぐりマーケット</text>
+  </g>
+  <g>
+    <circle cx="530" cy="385" r="11" fill="#1E8E3E"/><text x="530" y="389.5" font-size="10" fill="#fff" text-anchor="middle">P</text>
+    <text x="547" y="370" class="poi" fill="#1E8E3E">駐車場</text>
+  </g>
+
+  <!-- 地名 -->
+  <text x="300" y="110" class="area">もりのまち 1丁目</text>
+  <text x="500" y="540" class="area">もりのまち 2丁目</text>
+
+  <!-- 教室のピン（Googleマップ風の赤いピン） -->
+  <g transform="translate(345 245)">
+    <ellipse cx="0" cy="44" rx="10" ry="4" fill="rgba(0,0,0,.25)"/>
+    <path d="M0 44 C -6 30, -22 18, -22 0 A22 22 0 0 1 22 0 C 22 18, 6 30, 0 44 Z" fill="#EA4335" stroke="#B31412" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="8" fill="#B31412"/>
+  </g>
+  <g>
+    <rect x="378" y="224" width="200" height="44" rx="8" fill="#FFFFFF" stroke="#E0E0E0"/>
+    <text x="392" y="243" font-size="14" font-weight="800" fill="#B31412">うさぎの森 えいごスクール</text>
+    <text x="392" y="260" font-size="11" fill="#666">もりのまち駅から徒歩4分</text>
+  </g>
+
+  <!-- 徒歩ルート（青い点線） -->
+  <path d="M360 392 V330 M360 310 V290" stroke="#1A73E8" stroke-width="4" stroke-dasharray="2 8" stroke-linecap="round" fill="none"/>
+
+  <!-- 方位・注記 -->
+  <g transform="translate(750 50)">
+    <circle r="20" fill="#FFFFFF" stroke="#DADADA"/>
+    <path d="M0 -14 L6 4 L0 0 L-6 4 Z" fill="#EA4335"/>
+    <text y="16" font-size="10" text-anchor="middle" fill="#555" font-weight="700">N</text>
+  </g>
+  <rect x="8" y="572" width="172" height="20" rx="4" fill="rgba(255,255,255,.85)"/>
+  <text x="16" y="586" font-size="11" fill="#777">※架空の地図です（イメージ）</text>
+</svg>

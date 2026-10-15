@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+/* =========================================================
+   お問い合わせ（contact.html）
+   ※ 色・フォント・ヘッダー・フッター・見出し(.heading)・吹き出し(.bubble)・
+      ページ背景(.news-detail)は style.css を共通で使用。ここではこのページ用の見た目だけ
+   ========================================================= */
+
+.contact-page { padding-bottom: clamp(120px, 13vw, 170px); } /* 下のてんとう虫のぶん余白 */
+.contact-page__inner { max-width: 760px; }
+
+/* ---- フォームの白い箱 ---- */
+.cf-card {
+  scroll-margin-top: 16px;
+  padding: clamp(32px, 6vw, 60px) clamp(22px, 7vw, 64px);
+  background: #fff; border-radius: var(--radius-m);
+  box-shadow: 0 2px 10px rgba(28,74,110,.05);
+}
+
+.cf__row { margin: 0 0 28px; padding: 0; border: 0; min-width: 0; }
+.cf__label {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px; padding: 0;
+  font-size: .92rem; font-weight: 800; letter-spacing: .04em; color: var(--ink);
+}
+/* 「必須」バッジ */
+.cf__req {
+  display: inline-block; padding: 1px 9px;
+  border-radius: var(--radius-pill); background: #2C92D8; color: #fff;
+  font-size: .68rem; font-weight: 700; line-height: 1.6; letter-spacing: .06em;
+}
+
+/* ---- 入力欄 ---- */
+.cf__input {
+  display: block; width: 100%; min-height: 50px; padding: 10px 16px;
+  border: 1.5px solid #CFC7BF; border-radius: 10px; background: #fff;
+  font: inherit; font-size: 1rem; color: var(--ink); line-height: 1.6;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.cf__input::placeholder { color: #B5ADA6; font-size: .88rem; }
+.cf__input:focus {
+  outline: none; border-color: #2C92D8;
+  box-shadow: 0 0 0 4px rgba(44,146,216,.15);
+}
+.cf__textarea { min-height: 170px; resize: vertical; }
+/* 架空サイトのため入力欄は使えない状態にしている */
+.cf__input:disabled { background: #F4F0EC; cursor: not-allowed; }
+.cf__radio:has(input:disabled), .cf__check:has(input:disabled),
+.cf__radio input:disabled, .cf__check input:disabled { cursor: not-allowed; }
+
+/* ---- ラジオボタン・チェックボックス（色だけサイトに合わせる） ---- */
+.cf__radios { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.cf__radio, .cf__check {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .9rem; cursor: pointer;
+}
+.cf__radio input, .cf__check input {
+  width: 18px; height: 18px; margin: 0; flex: none;
+  accent-color: #2C92D8; cursor: pointer;
+}
+
+.cf__agree { margin-top: 8px; }
+.cf__check a { color: #2C92D8; text-decoration: underline; text-underline-offset: 3px; }
+.cf__note { margin-top: 10px; font-size: .78rem; line-height: 1.9; color: var(--ink-soft); }
+
+/* ---- 送信ボタン：トップの「メールフォームで問い合わせる」と同じ動き ---- */
+.cf__submit { margin-top: 36px; text-align: center; }
+.cf__btn {
+  min-width: min(320px, 100%); min-height: 58px; padding: 0 40px;
+  border: 0; border-radius: var(--radius-pill);
+  background: var(--blue); color: var(--on-blue);
+  font: inherit; font-size: 1rem; font-weight: 800; letter-spacing: .1em;
+  box-shadow: var(--shadow-card); cursor: pointer;
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), background-color .25s ease, box-shadow .25s ease;
+}
+.cf__btn:hover,
+.cf__btn:focus-visible {
+  transform: scale(1.06);
+  background: var(--blue-deep);
+  box-shadow: inset 0 0 0 3px #4A3413, 0 14px 30px rgba(74, 52, 19, .22);
+}
+.cf__btn:disabled { opacity: .5; transform: none; cursor: default; box-shadow: var(--shadow-card); }
+
+.cf__thanks {
+  padding: clamp(28px, 4vw, 36px) clamp(18px, 4vw, 24px); border-radius: 12px;
+  background: #E6F4DF; color: var(--green-deep);
+  font-size: .9rem; font-weight: 700; line-height: 2.1; letter-spacing: .06em; text-align: center;
+}
+/* 制作サンプルのため実際には送信されない旨の注記（お礼文の下に小さく） */
+.cf__thanks-note {
+  display: block; margin-top: 14px;
+  font-size: .72rem; font-weight: 500; line-height: 2; color: var(--ink-soft);
+}
+/* ---- 個人情報の取り扱い（折りたたみ） ---- */
+.cf-privacy { scroll-margin-top: 16px; margin-top: 36px; padding-top: 20px; border-top: 1.5px dashed #E4DCD5; }
+.cf-privacy summary { font-size: .84rem; font-weight: 700; color: var(--ink-soft); cursor: pointer; }
+.cf-privacy p { margin-top: 10px; font-size: .8rem; line-height: 2; color: var(--ink-soft); }
+
+/* ---- 電話の箱 ---- */
+.cf-tel {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(16px, 3vw, 28px);
+  margin-top: clamp(36px, 5vw, 50px);
+  padding: clamp(28px, 4vw, 40px) 24px;
+  background: #FDF9F5; border-radius: var(--radius-m);
+}
+.cf-tel__icon { width: clamp(42px, 5vw, 52px); height: auto; flex: none; color: var(--ink); }
+.cf-tel__body { text-align: center; }
+.cf-tel__label { font-size: .84rem; font-weight: 700; }
+.cf-tel__num {
+  display: inline-block;
+  font-family: var(--font-en); font-size: clamp(1.8rem, 4vw, 2.3rem); font-weight: 800;
+  line-height: 1.25; letter-spacing: .02em; color: var(--blue-ink);
+  transition: opacity .2s ease;
+}
+.cf-tel__num:hover { opacity: .75; }
+.cf-tel__time { font-size: .8rem; color: var(--ink-soft); }
+
+/* ---- フッター上のてんとう虫と「Join us!」 ---- */
+.contact-page__mascot {
+  position: absolute; right: clamp(20px, 11vw, 160px); bottom: clamp(16px, 2vw, 28px);
+  width: clamp(64px, 7vw, 90px);
+}
+.contact-page__mascot img { width: 100%; background: none; animation: picFloat 5s ease-in-out infinite; }
+.contact-page__mascot .bubble {
+  bottom: 92%; left: 30%; white-space: nowrap;
+  transform: rotate(-8deg); transform-origin: left bottom;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf__input, .cf__btn, .cf-tel__num { transition: none; }
+  .contact-page__mascot img { animation: none; }
+}
+
+@media (max-width: 560px) {
+  .cf__radios { flex-direction: column; gap: 6px; }
+  .cf-tel { flex-direction: column; gap: 10px; }
+  .contact-page__mascot .bubble { left: auto; right: 40%; transform: rotate(8deg); transform-origin: right bottom; }
+  .contact-page__mascot .bubble::after { left: auto; right: 22px; }
+}

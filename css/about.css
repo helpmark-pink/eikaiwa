@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/* =========================================================
+   うさぎの森について・教室のご案内（about.html）
+   ※ 色・フォント・ヘッダー・フッター・見出し(.heading)などは style.css を共通で使用
+   ========================================================= */
+
+/* ---- 上の帯：黄色（サイトの --blue）＋右上の地球＋左のイラスト ---- */
+.about-hero {
+  position: relative; overflow: hidden;
+  background: var(--blue);
+  padding: calc(var(--header-h) + 30px) 0 clamp(90px, 12vw, 150px);
+}
+.about-hero__heading { position: relative; z-index: 2; }
+.about-hero__heading small { color: var(--on-blue); }
+.about-hero__globe {
+  position: absolute; z-index: 1; top: clamp(-160px, -12vw, -60px); right: clamp(-120px, -6vw, -40px);
+  width: clamp(240px, 34vw, 480px); height: auto;
+  animation: spinSlowPlain 160s linear infinite;
+}
+@keyframes spinSlowPlain { to { transform: rotate(360deg); } }
+.about-hero__kid {
+  position: absolute; z-index: 2; left: clamp(16px, 9vw, 160px); top: calc(var(--header-h) + 10px);
+  width: clamp(90px, 10vw, 140px);
+}
+.about-hero__kid img { width: 100%; height: auto; background: none; animation: picFloat 5s ease-in-out infinite; }
+.about-hero__hello { display: block; width: 80%; margin: 0 0 -6px 10%; }
+.about-hero__deco {
+  position: absolute; z-index: 2; right: clamp(20px, 10vw, 180px); bottom: clamp(40px, 6vw, 80px);
+  width: clamp(50px, 5vw, 70px); height: auto; background: none;
+  animation: picFloat 5s ease-in-out infinite; animation-delay: -2s;
+}
+.about-hero__arc { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(50px, 8vw, 120px); z-index: 1; }
+
+/* ---- 理念 ---- */
+.about-intro {
+  position: relative; overflow: hidden;
+  background: #F7EFE9; padding: clamp(40px, 6vw, 70px) 0 clamp(70px, 9vw, 110px);
+  text-align: center;
+}
+.about-intro__catch {
+  font-size: clamp(1.35rem, 2.8vw, 1.9rem); font-weight: 800; line-height: 1.7;
+  color: var(--ink); letter-spacing: .08em;
+}
+.about-intro__text { margin-top: 30px; font-size: .92rem; line-height: 2.3; color: var(--ink); }
+.about-intro__deco { position: absolute; height: auto; background: none; pointer-events: none; }
+.about-intro__deco--flower { left: clamp(10px, 14vw, 240px); top: 30px; width: clamp(50px, 5vw, 72px); animation: picFloat 5s ease-in-out infinite; }
+.about-intro__deco--zigzag { right: clamp(10px, 14vw, 240px); bottom: 80px; width: clamp(60px, 6vw, 90px); }
+
+/* ---- 白いカード（施設概要・教室マップ） ---- */
+.about-box-wrap { background: #F7EFE9; padding-bottom: clamp(50px, 6vw, 80px); }
+.about-box-wrap--last { padding-bottom: clamp(120px, 14vw, 180px); } /* 下のお問い合わせの弧のぶん余白 */
+.about-box {
+  max-width: 920px; margin-inline: auto;
+  background: #fff; border-radius: var(--radius-l);
+  padding: clamp(36px, 5vw, 60px) clamp(20px, 5vw, 60px);
+  box-shadow: 0 6px 20px rgba(28,74,110,.06);
+}
+.about-box .heading { margin-bottom: 34px; }
+
+/* 施設概要：地図＋表 */
+.facility { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(20px, 4vw, 44px); align-items: center; }
+.facility__map { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid #ECE6E0; }
+.facility__map img { display: block; width: 100%; height: auto; }
+.facility__table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.facility__table th, .facility__table td { padding: 14px 10px; text-align: left; vertical-align: top; line-height: 1.8; border-bottom: 1px solid #D9D2CB; }
+.facility__table th { width: 28%; font-weight: 800; color: var(--ink); white-space: nowrap; }
+.facility__note { font-size: .8rem; color: var(--ink-soft); }
+
+/* 教室マップ：各階 */
+.floor { padding: 34px 0; }
+.floor + .floor { border-top: 1.5px solid #D9D2CB; }
+.floor:first-of-type { padding-top: 0; }
+.floor__label {
+  display: inline-block; min-width: 64px; padding: 2px 16px;
+  border-radius: var(--radius-pill); background: #2C92D8; color: #fff;
+  font-family: var(--font-en); font-weight: 800; text-align: center;
+}
+.floor__name { display: inline-block; margin-left: 12px; font-weight: 800; color: var(--ink); }
+.floor__plan { display: block; width: 100%; max-width: 520px; height: auto; margin: 22px auto 0; }
+/* 間取り図の文字 */
+.fp-txt { font-family: "Zen Maru Gothic", sans-serif; font-size: 11px; font-weight: 700; fill: #5A534D; }
+.fp-txt--b { font-size: 14px; fill: #4A3413; }
+.fp-txt--w { fill: #fff; font-size: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-hero__globe, .about-hero__kid img, .about-hero__deco, .about-intro__deco--flower { animation: none; }
+}
+
+/* ---- レスポンシブ ---- */
+@media (max-width: 760px) {
+  .facility { grid-template-columns: 1fr; }
+  .about-intro__text br { display: none; }
+  .about-intro__text { text-align: left; }
+  .about-intro__deco--zigzag { display: none; }
+}
+@media (max-width: 560px) {
+  .about-hero__kid { left: 12px; top: calc(var(--header-h) + 40px); width: 76px; }
+  .about-hero__deco { right: 16px; bottom: 34px; width: 44px; } /* 狭い画面でも隠さず、小さくして右下に */
+  .about-intro__deco--flower { display: none; } /* 狭い画面ではキャッチコピーに重なるため */
+  .facility__table th { width: 30%; }
+  .facility__table th, .facility__table td { padding: 12px 6px; font-size: .84rem; }
+  .floor__name { display: block; margin: 8px 0 0; }
+}

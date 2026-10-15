@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+/* =========================================================
+   よくあるご質問（faq.html）
+   ※ 色・フォント・ヘッダー・フッター・見出し(.heading)・開閉の仕組み(.faq-item)は
+      style.css / main.js を共通で使用。ここではこのページ用の見た目だけを上書き
+   ========================================================= */
+
+.faq-page { padding-bottom: clamp(110px, 13vw, 170px); } /* 下のお問い合わせの弧のぶん余白 */
+.faq-page__inner { max-width: 820px; }
+
+/* ---- カテゴリへ移動するボタン（↓つき） ---- */
+.faq-jump { margin: 6px 0 clamp(40px, 5vw, 60px); }
+.faq-jump ul { display: flex; flex-wrap: wrap; gap: 10px; }
+.faq-jump a {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 34px; padding: 0 16px;
+  border: 1.5px solid #CFC7BF; border-radius: var(--radius-pill);
+  background: #fff; color: var(--ink);
+  font-size: .8rem; font-weight: 700; letter-spacing: .04em;
+  transition: border-color .2s ease, color .2s ease;
+}
+.faq-jump a::after { content: "↓"; font-size: .78rem; color: #2C92D8; }
+.faq-jump a:hover { border-color: #2C92D8; color: #2C92D8; }
+
+/* ---- カテゴリ ---- */
+.faq-cat { scroll-margin-top: 16px; } /* ヘッダー分は style.css の scroll-padding-top で確保済み */
+.faq-cat + .faq-cat { margin-top: clamp(44px, 5vw, 60px); }
+.faq-cat__title {
+  margin-bottom: 16px; padding-left: 12px;
+  border-left: 3px solid var(--ink);
+  font-size: 1.05rem; font-weight: 800; letter-spacing: .06em; color: var(--ink);
+}
+
+/* ---- 質問の箱：白い角丸・Q.・＋（トップページのFAQの形を上書き） ---- */
+.faq-page .faq-list { gap: 14px; }
+.faq-page .faq-item {
+  border: 0; border-radius: 12px; background: #fff;
+  box-shadow: 0 2px 10px rgba(28,74,110,.05);
+  transition: box-shadow .2s ease;
+}
+.faq-page .faq-item:hover { box-shadow: 0 6px 18px rgba(28,74,110,.1); }
+.faq-page .faq-item__q { padding: 22px 64px 22px 58px; font-size: .9rem; }
+.faq-page .faq-item__q::before {
+  content: "Q."; left: 22px; color: #2C92D8; font-size: 1.05rem;
+}
+/* 右の「＋」：横線は ::after、縦線は背景で描き、開いたら縦線を消して「−」に */
+.faq-page .faq-item__q::after {
+  right: 26px; width: 16px; height: 16px; margin-top: -8px;
+  border: 0; transform: none;
+  background:
+    linear-gradient(#2C92D8, #2C92D8) center / 16px 2px no-repeat,
+    linear-gradient(#2C92D8, #2C92D8) center / 2px 16px no-repeat;
+  transition: background-size .25s ease;
+}
+.faq-page .faq-item__q[aria-expanded="true"]::after {
+  transform: none; margin-top: -8px;
+  background-size: 16px 2px, 2px 0;
+}
+/* 閉じているときの下余白は 0（開閉のアニメーションは style.css 側） */
+.faq-page .faq-item__a { position: relative; padding: 0 28px 0 58px; }
+.faq-page .faq-item__a.is-open { padding-bottom: 24px; }
+.faq-page .faq-item__a::before {
+  content: "A."; position: absolute; left: 22px; top: 0;
+  font-family: var(--font-en); font-weight: 800; font-size: 1.05rem; color: var(--coral);
+}
+.faq-page .faq-item__a p { font-size: .88rem; line-height: 2; color: var(--ink); }
+
+.faq-page__more { margin-top: 50px; text-align: center; font-size: .9rem; }
+.faq-page__more a { color: #2C92D8; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 560px) {
+  .faq-jump ul { gap: 8px; }
+  .faq-jump a { min-height: 32px; padding: 0 12px; font-size: .74rem; }
+  .faq-page .faq-item__q { padding: 18px 50px 18px 48px; font-size: .86rem; }
+  .faq-page .faq-item__q::before, .faq-page .faq-item__a::before { left: 16px; }
+  .faq-page .faq-item__q::after { right: 18px; }
+  .faq-page .faq-item__a { padding: 0 18px 0 48px; }
+  .faq-page .faq-item__a.is-open { padding-bottom: 20px; }
+}

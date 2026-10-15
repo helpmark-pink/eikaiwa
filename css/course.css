@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+/* =========================================================
+   コース紹介ページ（course.html）
+   ※ 色・フォント・ヘッダー・フッター・見出し(.heading)などは style.css を共通で使用
+   ※ 各コースのテーマ色は section の style 属性で --c（メイン）/ --c-pale（うすい色）を指定
+   ========================================================= */
+
+/* ---- ページ上部：見出し＋6コースへのカード ---- */
+.course-head {
+  position: relative; overflow: hidden;
+  background: #F7EFE9;
+  padding: calc(var(--header-h) + 50px) 0 clamp(40px, 6vw, 70px);
+}
+.course-head .heading { position: relative; margin-bottom: 20px; }
+.course-head__lead { text-align: center; font-size: .95rem; line-height: 2; color: var(--ink); }
+
+.course-nav {
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 26px 14px; margin-top: 40px;
+}
+.course-nav__item {
+  position: relative; display: grid; justify-items: center; gap: 8px;
+  padding: 26px 10px 18px; margin-top: 12px;
+  background: #fff; border-radius: 16px; box-shadow: var(--shadow-card);
+  text-align: center;
+  transition: transform .25s cubic-bezier(.22,.8,.3,1), box-shadow .25s ease;
+}
+.course-nav__age {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  white-space: nowrap; padding: 2px 12px; border-radius: var(--radius-pill);
+  background: var(--c); color: #fff; font-size: .72rem; font-weight: 800;
+}
+.course-nav__item img { width: 64px; height: 64px; object-fit: contain; background: none; }
+.course-nav__name { font-size: .82rem; font-weight: 800; line-height: 1.5; color: var(--c); }
+.course-nav__item:hover { transform: translateY(-6px); box-shadow: 0 14px 28px rgba(28,74,110,.14); }
+
+/* ---- 各コース ---- */
+.cp {
+  position: relative; overflow: hidden;
+  background: #F7EFE9;
+  padding-top: clamp(70px, 9vw, 120px);
+  scroll-margin-top: 0;
+}
+.cp + .cp { border-top: 2px dotted #DCD2C8; }
+
+/* ヒーロー：雲形の写真＋年齢タグ・英語のコース名 */
+.cp-hero {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 60px); align-items: center;
+}
+.cp-hero__photo { position: relative; margin: 0; }
+.cp-hero__photo > img:first-child {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border: 10px solid #fff;
+  border-radius: 58% 42% 50% 50% / 50% 46% 54% 50%;
+  box-shadow: var(--shadow-card);
+}
+/* 吹き出しのしっぽ（左下） */
+.cp-hero__photo::after {
+  content: ""; position: absolute; left: 14%; bottom: -26px;
+  width: 44px; height: 40px; background: #fff;
+  clip-path: polygon(30% 0, 100% 0, 0 100%);
+}
+.cp-hero__icon {
+  position: absolute; top: -26px; right: 6%;
+  width: clamp(70px, 8vw, 110px); height: auto; background: none;
+  animation: picFloat 5s ease-in-out infinite;
+}
+.cp-hero__title { text-align: right; }
+.cp-age {
+  display: inline-block; padding: 4px 18px; border-radius: var(--radius-pill);
+  background: var(--c); color: #fff; font-size: .9rem; font-weight: 800;
+}
+.cp-hero__en {
+  margin-top: 8px;
+  font-family: var(--font-en); font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800;
+  line-height: 1.05; color: var(--c);
+}
+.cp-hero__ja { margin-top: 8px; font-size: 1rem; font-weight: 800; color: var(--ink); letter-spacing: .06em; }
+/* 偶数番目のコースは左右を入れ替えて変化をつける */
+.cp-hero--reverse .cp-hero__photo { order: 2; }
+.cp-hero--reverse .cp-hero__title { text-align: left; }
+.cp-hero--reverse .cp-hero__photo::after { left: auto; right: 14%; clip-path: polygon(0 0, 70% 0, 100% 100%); }
+.cp-hero--reverse .cp-hero__icon { right: auto; left: 6%; }
+
+/* キャッチコピー・説明 */
+.cp-intro { margin-top: clamp(50px, 6vw, 80px); }
+.cp-intro__catch {
+  text-align: center; font-size: clamp(1.25rem, 2.6vw, 1.75rem); font-weight: 800;
+  line-height: 1.75; color: var(--c); letter-spacing: .06em;
+}
+.cp-intro__text { margin-top: 30px; font-size: .95rem; line-height: 2.2; color: var(--ink); }
+.cp-intro__text p + p { margin-top: .6em; }
+
+/* 写真の帯：トップのギャラリー（.gallery）と同じく、5枚×4セットを左へ流し続ける */
+.cp-strip { overflow: hidden; margin-top: clamp(50px, 6vw, 80px); }
+.cp-strip__track { display: flex; width: max-content; animation: marquee 80s linear infinite; }
+.cp-strip__item {
+  flex: none; width: clamp(180px, 22vw, 320px); aspect-ratio: 4 / 3; border-radius: 14px; overflow: hidden;
+  margin-right: 16px; /* gap だと -50% がずれるので、余白は各写真に持たせる */
+}
+.cp-strip__item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- 特徴：コース色の帯（上下は波形） ---- */
+.cp-features { position: relative; color: var(--c); margin-top: clamp(-70px, -5vw, -40px); }
+.cp-wave { display: block; width: 100%; height: clamp(50px, 7vw, 110px); }
+.cp-wave--top { margin-bottom: -1px; }
+.cp-wave--bottom { margin-top: -1px; }
+.cp-features__inner { background: var(--c); color: #fff; padding: 20px 28px 10px; }
+.cp-features__inner .heading { margin-bottom: 20px; }
+/* コース色の帯の上なので、見出しは白に（共通の .heading--light の色に左右されないよう指定） */
+.cp-features__inner .heading,
+.cp-features__inner .heading small { color: #fff; }
+
+.cp-feature {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 70px); align-items: center;
+  max-width: 980px; margin: clamp(50px, 6vw, 80px) auto 0;
+}
+.cp-feature--reverse .cp-feature__photo { order: 2; }
+.cp-feature__photo { margin: 0; }
+.cp-feature__photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; box-shadow: 0 16px 30px rgba(0,0,0,.12); }
+/* 写真の形を3種類の雲形に */
+.cp-feature__photo--1 img { border-radius: 50% 50% 46% 54% / 56% 50% 50% 44%; }
+.cp-feature__photo--2 img { border-radius: 40% 60% 56% 44% / 48% 42% 58% 52%; }
+.cp-feature__photo--3 img { border-radius: 56% 44% 42% 58% / 44% 56% 44% 56%; }
+.cp-feature__no { font-family: var(--font-en); font-size: 1.3rem; font-weight: 800; }
+.cp-feature__title { margin-top: 6px; font-size: clamp(1.05rem, 1.8vw, 1.3rem); font-weight: 800; line-height: 1.7; letter-spacing: .04em; }
+.cp-feature__text { margin-top: 14px; font-size: .9rem; line-height: 2.1; }
+
+/* 流れる白い文字（トップページのマーキーを流用し、色だけ変更） */
+.cp .cp-marquee { background: var(--c); padding: clamp(40px, 5vw, 70px) 0 10px; }
+.cp .cp-marquee span { color: #fff; }
+
+/* ---- レッスンの流れ（タイムライン） ---- */
+.cp-schedule { margin-top: clamp(60px, 7vw, 90px); }
+.cp-schedule .heading { margin-bottom: 36px; }
+.cp-timeline { position: relative; display: grid; gap: 22px; padding-left: 30px; }
+.cp-timeline::before { /* 縦の線 */
+  content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px;
+  width: 3px; border-radius: 3px; background: var(--c);
+}
+.cp-timeline__time {
+  position: relative; font-family: var(--font-en); font-weight: 800; color: var(--c); letter-spacing: .04em;
+}
+.cp-timeline__time::before { /* 丸い点 */
+  content: ""; position: absolute; left: -30px; top: .45em;
+  width: 17px; height: 17px; border-radius: 50%; background: var(--c); border: 4px solid #F7EFE9;
+}
+.cp-timeline__card {
+  display: flex; align-items: center; gap: 18px;
+  margin-top: 8px; padding: 20px 24px;
+  background: #fff; border-radius: 16px; box-shadow: var(--shadow-card);
+}
+.cp-timeline__card img { flex: none; width: 56px; height: 56px; object-fit: contain; background: none; }
+.cp-timeline__title { font-weight: 800; color: var(--c); }
+.cp-timeline__text { margin-top: 4px; font-size: .88rem; line-height: 1.8; color: var(--ink); }
+
+/* ---- 募集要項＋資料ダウンロード ---- */
+.cp-info { margin-top: clamp(70px, 8vw, 100px); padding-bottom: clamp(100px, 12vw, 150px); }
+.cp-info .heading { margin-bottom: 30px; }
+.cp-info__name {
+  margin-bottom: 12px; padding-left: 12px; border-left: 4px solid var(--c);
+  font-weight: 800; letter-spacing: .06em;
+}
+.cp-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  border: 1.5px solid var(--c); border-radius: 16px; overflow: hidden;
+  background: #fff; font-size: .9rem;
+}
+.cp-table th, .cp-table td { padding: 18px 22px; text-align: left; vertical-align: middle; line-height: 1.8; }
+.cp-table th { width: 26%; background: var(--c-pale); font-weight: 800; border-right: 1.5px solid var(--c); }
+.cp-table tr + tr th, .cp-table tr + tr td { border-top: 1px solid var(--c); }
+
+.cp-download {
+  position: relative; display: flex; align-items: center; gap: 22px;
+  max-width: 540px; margin: 40px auto 0; padding: 24px 80px 24px 34px;
+  background: var(--c); color: #fff; border-radius: 22px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.12);
+  transition: transform .25s cubic-bezier(.22,.8,.3,1), box-shadow .25s ease;
+}
+.cp-download__icon { flex: none; width: 56px; height: 56px; color: var(--c); }
+.cp-download__text { display: grid; gap: 2px; }
+.cp-download__text strong { font-family: var(--font-en); font-size: 1.5rem; line-height: 1.1; }
+.cp-download__text small { font-size: .78rem; font-weight: 800; }
+.cp-download__text span { margin-top: 4px; font-size: .82rem; font-weight: 700; }
+.cp-download::after { /* 右の丸い矢印 */
+  content: "→"; position: absolute; right: 26px; top: 50%; transform: translateY(-50%);
+  display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
+  background: #fff; color: var(--c); font-weight: 800;
+}
+.cp-download:hover { transform: translateY(-4px); box-shadow: 0 18px 32px rgba(0,0,0,.16); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-hero__icon, .cp-strip__track { animation: none; }
+  .course-nav__item, .cp-download { transition: none; }
+}
+
+/* ---- レスポンシブ ---- */
+@media (max-width: 960px) {
+  .course-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cp-hero { grid-template-columns: 1fr; }
+  .cp-hero__photo, .cp-hero--reverse .cp-hero__photo { order: 0; max-width: 560px; margin-inline: auto; width: 100%; }
+  .cp-hero__title, .cp-hero--reverse .cp-hero__title { text-align: center; margin-top: 20px; }
+  .cp-feature { grid-template-columns: 1fr; }
+  .cp-feature--reverse .cp-feature__photo { order: 0; }
+  .cp-feature__photo { max-width: 480px; margin-inline: auto; width: 100%; }
+}
+/* 406px以下：コース紹介カードのコース名を1行に収める（文字を少し小さく・改行なし） */
+@media (max-width: 406px) {
+  .course-nav { gap: 24px 10px; }
+  .course-nav__item { padding-inline: 6px; }
+  .course-nav__name { white-space: nowrap; font-size: .68rem; letter-spacing: 0; }
+  .course-nav__age { font-size: .66rem; padding: 2px 10px; }
+}
+@media (max-width: 560px) {
+  .course-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cp-intro__catch { text-align: left; }
+  .cp-features__inner { padding-inline: 18px; }
+  .cp-table th, .cp-table td { padding: 14px 14px; }
+  .cp-table th { width: 32%; }
+  .cp-download { padding: 20px 64px 20px 22px; gap: 14px; }
+  .cp-download::after { right: 16px; }
+  .cp-download__icon { width: 44px; height: 44px; }
+}

@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+/* =========================================================
+   お知らせのページページ（news.html）
+   ※ 色・フォント・ヘッダー・フッターなどは style.css を共通で使用
+      （ページ上部の余白・左上の雲・見出しは .news-detail の指定を流用）
+   ========================================================= */
+
+/* ---- カテゴリの絞り込みボタン ---- */
+.news-filter { margin: 8px 0 40px; }
+.news-filter ul {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px;
+}
+.news-filter__btn {
+  min-height: 34px; padding: 0 16px;
+  border: 1.5px solid #CFC7BF; border-radius: var(--radius-pill);
+  background: #fff; color: var(--ink);
+  font-family: inherit; font-size: .8rem; font-weight: 700; letter-spacing: .06em;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.news-filter__btn:hover { border-color: var(--blue-ink); color: var(--blue-ink); }
+.news-filter__btn.is-active {
+  background: var(--blue-ink); border-color: var(--blue-ink); color: #fff;
+}
+
+/* ---- 一覧（4列のカード） ---- */
+.news-list {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(32px, 4vw, 48px) clamp(18px, 2.4vw, 28px);
+}
+.news-item[hidden] { display: none; }
+.news-item__link { display: block; }
+
+.news-item__thumb {
+  position: relative; overflow: hidden;
+  aspect-ratio: 6 / 5; border-radius: 10px;
+  background: #fff;
+}
+.news-item__thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .45s cubic-bezier(.22,.8,.3,1);
+}
+/* 写真がないお知らせは、うすいクリーム地にロゴ */
+.news-item__thumb--logo { display: grid; place-items: center; background: #FFFCF6; }
+.news-item__thumb--logo .news-item__logo { width: 72px; height: 72px; object-fit: contain; background: none; }
+
+/* 写真の左上に重ねるカテゴリのタグ（複数なら縦に並ぶ） */
+.news-item__tags {
+  position: absolute; top: 10px; left: 10px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+}
+.news-tag {
+  display: inline-block; padding: 2px 10px;
+  border: 1.5px solid #fff; border-radius: var(--radius-pill);
+  font-size: .7rem; font-weight: 800; line-height: 1.6; color: #fff; letter-spacing: .04em;
+}
+/* タグの色：コース紹介のカードの色とそろえる */
+.news-tag--usagi   { background: var(--blue-ink); }
+.news-tag--oyako   { background: #4FA83C; }
+.news-tag--chiiku  { background: #E09A00; }
+.news-tag--after   { background: #EE6F55; }
+.news-tag--phonics { background: #2C92D8; }
+.news-tag--step    { background: #1FA37A; }
+.news-tag--eiken   { background: #8E6BD1; }
+
+.news-item__title {
+  margin-top: 12px;
+  font-size: .9rem; font-weight: 700; line-height: 1.7; color: var(--ink);
+  transition: color .2s ease;
+}
+.news-item__date { display: block; margin-top: 4px; font-family: var(--font-en); font-size: .78rem; color: var(--ink-soft); }
+
+/* ホバー：写真が少し拡大し、タイトルが青に */
+.news-item__link:hover .news-item__thumb img:not(.news-item__logo) { transform: scale(1.06); }
+.news-item__link:hover .news-item__title { color: #2C92D8; }
+
+/* 絞り込み・読み込みで出てきたカードをふわっと表示 */
+.news-item.is-appear { animation: newsAppear .5s cubic-bezier(.22,.8,.3,1) both; }
+@keyframes newsAppear { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+.news-empty { margin-top: 20px; text-align: center; color: var(--ink-soft); }
+
+/* ---- つづきを見る ---- */
+.news-more { margin-top: 56px; text-align: center; }
+.news-more[hidden] { display: none; }
+.news-more__btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  min-height: 50px; padding: 0 30px;
+  border: 1.5px solid #8FB9DD; border-radius: var(--radius-pill);
+  background: #fff; color: #2C92D8;
+  font-family: inherit; font-size: .88rem; font-weight: 700; letter-spacing: .06em;
+  cursor: pointer; transition: background-color .2s ease, transform .2s ease;
+}
+.news-more__btn::after { /* 下向きの矢印 */
+  content: ""; width: 8px; height: 8px; margin-top: -4px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+.news-more__btn:hover { background: #EEF6FC; transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .news-item.is-appear, .news-item__thumb img { animation: none; transition: none; }
+}
+
+/* ---- レスポンシブ ---- */
+@media (max-width: 960px) {
+  .news-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .news-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; }
+  .news-filter { margin-bottom: 30px; }
+  .news-filter__btn { min-height: 32px; padding: 0 12px; font-size: .74rem; }
+  .news-item__title { font-size: .84rem; }
+  .news-tag { font-size: .64rem; padding: 1px 8px; }
+}
