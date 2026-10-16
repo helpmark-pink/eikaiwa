@@ -916,9 +916,12 @@ h1,h2,h3,p,ul,ol,dl,dd,figure,blockquote { margin: 0; }ul, ol { list-style: none
 .site-footer__navtitle { font-weight: 800; color: var(--blue-ink); margin-bottom: 8px; }
 .site-footer__nav a { font-size: .86rem; color: var(--ink-soft); display: block; padding: 4px 0; }
 .site-footer__nav a:hover { color: var(--blue); }
-/* 青いカテゴリ名もリンク（ハンバーガーメニューと同じ行き先）。見た目は青い太字のまま、ホバーで下線 */
-.site-footer__navtitle a { font-size: inherit; color: inherit; padding: 0; }
-.site-footer__navtitle a:hover { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+/* 青いカテゴリ名もリンク（ハンバーガーメニューと同じ行き先）。ホバー・フォーカスで色と下線を変える */
+.site-footer__navtitle a { font-size: inherit; color: inherit; padding: 0; transition: color .2s ease; }
+.site-footer__navtitle a:hover,
+.site-footer__navtitle a:focus-visible { color: #2C92D8; text-decoration: underline; text-underline-offset: 3px; }
+.site-footer__navtitle a:hover .nowrap,
+.site-footer__navtitle a:focus-visible .nowrap { text-decoration: underline; text-underline-offset: 3px; }
 .copyright { text-align: center; padding: 16px; font-size: .78rem; color: var(--on-blue); background: var(--blue-deep); }
 /* 注記は途中で分かれないひとかたまりに。入りきらないときは丸ごと次の行へ */
 .copyright__note { display: inline-block; white-space: nowrap; }
